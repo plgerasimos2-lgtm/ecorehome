@@ -147,6 +147,46 @@ const reasons = [
   },
 ];
 
+const trustItems = [
+  "Δωρεάν πρώτη εκτίμηση έργου",
+  "Πλήρης διαφάνεια σε κόστος και χρονοδιάγραμμα",
+  "Ποιοτικά υλικά και προσεγμένη κατασκευή",
+  "Υποστήριξη πριν, κατά τη διάρκεια και μετά το έργο",
+];
+
+const faqs = [
+  {
+    question: "Πόσο χρόνο χρειάζεται μια ανακαίνιση;",
+    answer:
+      "Ο χρόνος εξαρτάται από το μέγεθος και τις απαιτήσεις του έργου. Πριν την έναρξη παρέχουμε σαφές χρονοδιάγραμμα με όλα τα στάδια.",
+  },
+  {
+    question: "Παρέχετε δωρεάν εκτίμηση κόστους;",
+    answer:
+      "Ναι. Μετά από σύντομη καταγραφή των αναγκών σας, ετοιμάζουμε αναλυτική προσφορά χωρίς χρέωση για την αρχική εκτίμηση.",
+  },
+  {
+    question: "Αναλαμβάνετε και μερικές επεμβάσεις;",
+    answer:
+      "Φυσικά. Αναλαμβάνουμε τόσο ολικές ανακαινίσεις όσο και μερικές παρεμβάσεις, ανάλογα με τον χώρο και το διαθέσιμο budget.",
+  },
+  {
+    question: "Δίνετε εγγύηση για τις εργασίες;",
+    answer:
+      "Ναι, παρέχουμε εγγύηση για τις εργασίες που υλοποιούμε, με έμφαση στην ποιότητα και τη σωστή τεχνική εφαρμογή.",
+  },
+  {
+    question: "Σε ποιες περιοχές εξυπηρετείτε;",
+    answer:
+      "Εξυπηρετούμε κυρίως Αθήνα και γύρω περιοχές. Για έργα εκτός Αττικής, η ομάδα μας ενημερώνει για διαθεσιμότητα και διαδικασία.",
+  },
+  {
+    question: "Πώς ξεκινάμε τη συνεργασία;",
+    answer:
+      "Συμπληρώνετε τη φόρμα επικοινωνίας ή καλείτε στο τηλέφωνο, γίνεται αρχική συζήτηση αναγκών και ορίζουμε επίσκεψη στον χώρο.",
+  },
+];
+
 function ReasonIcon({ icon }: { icon: string }) {
   if (icon === "experience") {
     return (
@@ -260,6 +300,19 @@ export default function Home() {
                 </p>
               </div>
             </div>
+          </div>
+        </section>
+
+        <section aria-label="Σημεία εμπιστοσύνης" className="border-y border-emerald-100 bg-emerald-50/70 py-6">
+          <div className="mx-auto grid w-full max-w-6xl gap-3 px-6 sm:grid-cols-2 lg:grid-cols-4 lg:px-8">
+            {trustItems.map((item) => (
+              <div
+                key={item}
+                className="rounded-2xl border border-emerald-100 bg-white/80 px-4 py-3 text-sm font-medium text-zinc-700 transition hover:-translate-y-0.5 hover:shadow-sm"
+              >
+                {item}
+              </div>
+            ))}
           </div>
         </section>
 
@@ -442,6 +495,58 @@ export default function Home() {
             <ContactForm />
           </div>
         </section>
+
+        <section id="faq" className="bg-zinc-50/80 py-20">
+          <div className="mx-auto w-full max-w-6xl px-6 lg:px-8">
+            <div className="mb-10 max-w-2xl space-y-4">
+              <h2 className="text-3xl font-semibold tracking-tight text-zinc-900 md:text-4xl">
+                Συχνές Ερωτήσεις
+              </h2>
+              <p className="text-lg text-zinc-600">
+                Απαντήσεις στις πιο συχνές απορίες για τη διαδικασία, το κόστος και τον χρόνο υλοποίησης.
+              </p>
+            </div>
+            <div className="grid gap-4 md:grid-cols-2">
+              {faqs.map((faq) => (
+                <details
+                  key={faq.question}
+                  className="group rounded-2xl border border-emerald-100 bg-white p-5 transition-all duration-300 hover:shadow-sm"
+                >
+                  <summary className="cursor-pointer list-none pr-6 text-base font-semibold text-zinc-900">
+                    {faq.question}
+                    <span className="ml-2 inline-block text-emerald-600 transition group-open:rotate-45">+</span>
+                  </summary>
+                  <p className="mt-3 text-sm leading-relaxed text-zinc-600">{faq.answer}</p>
+                </details>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="privacy" className="mx-auto w-full max-w-6xl px-6 py-16 lg:px-8">
+          <div className="rounded-3xl border border-emerald-100 bg-white p-8">
+            <h2 className="text-2xl font-semibold tracking-tight text-zinc-900">Πολιτική Απορρήτου &amp; Νομικά</h2>
+            <p className="mt-4 text-sm leading-relaxed text-zinc-600">
+              Τα στοιχεία που υποβάλλετε μέσω της φόρμας επικοινωνίας χρησιμοποιούνται αποκλειστικά για την εξυπηρέτηση του
+              αιτήματός σας. Η Eco ReHome δεν διαμοιράζει προσωπικά δεδομένα σε τρίτους χωρίς νόμιμη βάση. Με τη χρήση της
+              ιστοσελίδας αποδέχεστε τους βασικούς όρους χρήσης και την επεξεργασία δεδομένων σύμφωνα με την ισχύουσα νομοθεσία.
+            </p>
+            <p id="terms" className="mt-3 text-sm leading-relaxed text-zinc-600">
+              Για αιτήματα σχετικά με προσωπικά δεδομένα, μπορείτε να επικοινωνήσετε στο
+              {" "}
+              <a href="mailto:ecorehomeconstructions@gmail.com" className="font-medium text-emerald-700 hover:underline">
+                ecorehomeconstructions@gmail.com
+              </a>
+              {" "}
+              ή τηλεφωνικά στο
+              {" "}
+              <a href="tel:6970652145" className="font-medium text-emerald-700 hover:underline">
+                6970652145
+              </a>
+              .
+            </p>
+          </div>
+        </section>
       </main>
 
       <footer className="border-t border-emerald-100 bg-white py-10">
@@ -483,6 +588,18 @@ export default function Home() {
                 <path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Zm0 1.75a4 4 0 0 0-4 4v8.5a4 4 0 0 0 4 4h8.5a4 4 0 0 0 4-4v-8.5a4 4 0 0 0-4-4h-8.5Zm8.88 1.5a1.12 1.12 0 1 1 0 2.25 1.12 1.12 0 0 1 0-2.25ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 1.75a3.25 3.25 0 1 0 0 6.5 3.25 3.25 0 0 0 0-6.5Z" />
               </svg>
               <span>eco_rehome</span>
+            </a>
+            <a
+              className="inline-flex items-center gap-2 rounded-full border border-emerald-100 px-4 py-2 transition-all duration-300 hover:-translate-y-0.5 hover:border-emerald-300 hover:text-emerald-700 hover:shadow-sm"
+              href="#privacy"
+            >
+              Πολιτική Απορρήτου
+            </a>
+            <a
+              className="inline-flex items-center gap-2 rounded-full border border-emerald-100 px-4 py-2 transition-all duration-300 hover:-translate-y-0.5 hover:border-emerald-300 hover:text-emerald-700 hover:shadow-sm"
+              href="#terms"
+            >
+              Όροι Χρήσης
             </a>
           </div>
         </div>

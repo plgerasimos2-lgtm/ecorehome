@@ -15,8 +15,36 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Eco ReHome",
   description: "Η Eco ReHome προσφέρει επαγγελματικές ανακαινίσεις σπιτιών, κουζινών και μπάνιων στην Αθήνα με 10+ χρόνια εμπειρίας και 200+ ολοκληρωμένα έργα.",
-  keywords:
-    "ανακαινίσεις Αθήνα, ανακαίνιση σπιτιού, ανακαίνιση κουζίνας, ανακαίνιση μπάνιου, Eco ReHome",
+  keywords: [
+    "ανακαινίσεις Αθήνα",
+    "ανακαίνιση σπιτιού",
+    "ανακαίνιση κουζίνας",
+    "ανακαίνιση μπάνιου",
+    "επαγγελματικοί χώροι",
+    "ενεργειακή αναβάθμιση",
+    "Eco ReHome",
+  ],
+  openGraph: {
+    title: "Eco ReHome",
+    description:
+      "Ανακαινίσεις σπιτιών και επαγγελματικών χώρων με ποιότητα, συνέπεια και σύγχρονο σχεδιασμό.",
+    locale: "el_GR",
+    type: "website",
+    images: [
+      {
+        url: "/ecorehome-logo.png",
+        width: 512,
+        height: 512,
+        alt: "Λογότυπο Eco ReHome",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Eco ReHome",
+    description: "Ανακαινίσεις με ποιότητα και στυλ.",
+    images: ["/ecorehome-logo.png"],
+  },
 };
 
 export default function RootLayout({
