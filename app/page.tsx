@@ -94,12 +94,12 @@ const projectImages = [
   {
     title: "Υπνοδωμάτιο με Minimal Design",
     image:
-      "https://images.unsplash.com/photo-1616594039964-3f5e5c1b8f60?auto=format&fit=crop&w=1200&q=80",
+      "https://images.pexels.com/photos/1454806/pexels-photo-1454806.jpeg?auto=compress&cs=tinysrgb&w=1200",
   },
   {
     title: "Σύγχρονη Τραπεζαρία",
     image:
-      "https://images.unsplash.com/photo-1617104551722-3b2d513664d1?auto=format&fit=crop&w=1200&q=80",
+      "https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1200",
   },
 ];
 
