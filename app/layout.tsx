@@ -14,7 +14,9 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Eco ReHome",
-  description: "Eco ReHome - Ανακαινίσεις σπιτιών και επαγγελματικών χώρων με ποιότητα και στυλ.",
+  description: "Η Eco ReHome προσφέρει επαγγελματικές ανακαινίσεις σπιτιών, κουζινών και μπάνιων στην Αθήνα με 10+ χρόνια εμπειρίας και 200+ ολοκληρωμένα έργα.",
+  keywords:
+    "ανακαινίσεις Αθήνα, ανακαίνιση σπιτιού, ανακαίνιση κουζίνας, ανακαίνιση μπάνιου, Eco ReHome",
 };
 
 export default function RootLayout({
