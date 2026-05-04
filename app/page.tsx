@@ -72,51 +72,41 @@ const navSections = [
 
 const projectImages = [
   {
-    title: "Ανακαίνιση Καθιστικού",
-    image:
-      "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1200&q=80",
+    title: "Μπάνιο με ψηλά ντουλάπια αποθήκευσης",
+    image: "/project-bathroom-storage.png",
   },
   {
-    title: "Μοντέρνα Κουζίνα",
-    image:
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
+    title: "Τοίχος τηλεόρασης & ειδική κατασκευή",
+    image: "/project-tv-wall.png",
   },
   {
-    title: "Πλήρης Ανακαίνιση Μπάνιου",
-    image:
-      "https://images.unsplash.com/photo-1620626011761-996317b8d101?auto=format&fit=crop&w=1200&q=80",
+    title: "Καθιστικό με parquet και μπαλκόνι",
+    image: "/project-living-parquet.png",
   },
   {
-    title: "Επαγγελματικός Χώρος",
-    image:
-      "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80",
+    title: "Περίφραξη & είσοδος κατοικίας",
+    image: "/project-exterior-fence.png",
   },
   {
-    title: "Υπνοδωμάτιο με Minimal Design",
-    image:
-      "https://images.pexels.com/photos/1454806/pexels-photo-1454806.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    title: "Μπάνιο minimal με έπιπλο νιπτήρα",
+    image: "/project-bathroom-minimal.png",
   },
   {
-    title: "Σύγχρονη Τραπεζαρία",
-    image:
-      "https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    title: "Κουζίνα σε σχήμα Γ",
+    image: "/project-kitchen-corner.png",
   },
 ];
 
 const beforeAfterProjects = [
   {
-    title: "Ανακαίνιση Κουζίνας",
-    beforeImage:
-      "https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=1400&q=80",
-    afterImage:
-      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1400&q=80",
+    title: "Διαγράμμιση διαβάτη — επαγγελματικός χώρος",
+    beforeImage: "/before-pedestrian-crossing.png",
+    afterImage: "/after-pedestrian-crossing.png",
   },
   {
-    title: "Ανακαίνιση Καθιστικού",
-    beforeImage:
-      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1400&q=80",
-    afterImage:
-      "https://images.unsplash.com/photo-1615529328331-f8917597711f?auto=format&fit=crop&w=1400&q=80",
+    title: "Ανακαίνιση μπάνιου",
+    beforeImage: "/before-bathroom-renovation.png",
+    afterImage: "/after-bathroom-renovation.png",
   },
 ];
 

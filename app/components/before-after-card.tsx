@@ -51,10 +51,10 @@ export default function BeforeAfterCard({
           Σύρε
         </div>
 
-        <div className="pointer-events-none absolute left-3 top-3 rounded-full bg-black/45 px-3 py-1 text-xs font-medium text-white">
+        <div className="pointer-events-none absolute right-3 top-3 rounded-full bg-black/45 px-3 py-1 text-xs font-medium text-white">
           Πριν
         </div>
-        <div className="pointer-events-none absolute right-3 top-3 rounded-full bg-emerald-700/80 px-3 py-1 text-xs font-medium text-white">
+        <div className="pointer-events-none absolute left-3 top-3 rounded-full bg-emerald-700/80 px-3 py-1 text-xs font-medium text-white">
           Μετά
         </div>
       </div>
