@@ -9,7 +9,8 @@ const LOG_PREFIX = "[HubSpot CRM]";
 /** HubSpot default: deal → contact association */
 const DEAL_TO_CONTACT_ASSOCIATION_TYPE_ID = 3;
 
-type HubSpotObjectCreateResponse = { id: string };
+/** HubSpot επιστρέφει id, properties, createdAt κ.λπ. — κρατάμε ευέλικτο τύπο για logging */
+type HubSpotObjectCreateResponse = Record<string, unknown> & { id: string };
 
 function logHubSpotFailure(
   context: string,
@@ -68,6 +69,8 @@ export async function syncLeadToHubSpot(input: HubSpotLeadInput): Promise<void> 
       return;
     }
 
+    console.log(`${LOG_PREFIX} Contact create API response`, contactRes.data);
+
     const contactId = contactRes.data.id;
     const pipelineId = process.env.HUBSPOT_DEAL_PIPELINE_ID?.trim();
     const stageId = process.env.HUBSPOT_DEAL_STAGE_ID?.trim();
@@ -115,6 +118,8 @@ export async function syncLeadToHubSpot(input: HubSpotLeadInput): Promise<void> 
       );
       return;
     }
+
+    console.log(`${LOG_PREFIX} Deal create API response`, dealRes.data);
   } catch (err) {
     console.error(`${LOG_PREFIX} Unexpected error during sync`, err);
   }
