@@ -1,5 +1,8 @@
-import { NextResponse } from "next/server";
+import { after, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
+
+import { syncLeadToHubSpot } from "@/lib/hubspot/sync-lead";
+import type { HubSpotLeadInput } from "@/lib/hubspot/types";
 
 const recipientEmail = "ecorehomeconstructions@gmail.com";
 
@@ -9,6 +12,10 @@ type ContactPayload = {
   phone: string;
   message: string;
 };
+
+/** Προαιρετικά πεδία για HubSpot· η φόρμα δεν τα αλλάζει — μόνο server-side αν υπάρχουν στο JSON */
+type IncomingBody = ContactPayload &
+  Pick<HubSpotLeadInput, "area" | "service_type" | "budget" | "urgency">;
 
 function validatePayload(payload: ContactPayload): string | null {
   const { name, email, phone, message } = payload;
@@ -26,7 +33,7 @@ function validatePayload(payload: ContactPayload): string | null {
 
 export async function POST(request: Request) {
   try {
-    const body = (await request.json()) as ContactPayload;
+    const body = (await request.json()) as IncomingBody;
     const name = body.name?.trim() ?? "";
     const email = body.email?.trim() ?? "";
     const phone = body.phone?.trim() ?? "";
@@ -81,6 +88,20 @@ export async function POST(request: Request) {
         message,
       ].join("\n"),
     });
+
+    const hubSpotLead: HubSpotLeadInput = {
+      name,
+      email,
+      phone,
+      message,
+      area: typeof body.area === "string" ? body.area : undefined,
+      service_type:
+        typeof body.service_type === "string" ? body.service_type : undefined,
+      budget: typeof body.budget === "string" ? body.budget : undefined,
+      urgency: typeof body.urgency === "string" ? body.urgency : undefined,
+    };
+
+    after(() => syncLeadToHubSpot(hubSpotLead));
 
     return NextResponse.json(
       { success: "Το μήνυμά σας στάλθηκε με επιτυχία." },
