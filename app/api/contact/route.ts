@@ -4,7 +4,11 @@ import nodemailer from "nodemailer";
 import { syncLeadToHubSpot } from "@/lib/hubspot/sync-lead";
 import type { HubSpotLeadInput } from "@/lib/hubspot/types";
 
+/** Πού φτάνουν τα μηνύματα από τη φόρμα */
 const recipientEmail = "info@ecorehomeconstructions.com";
+
+/** Λογαριασμός Google SMTP (App Password) — όχι απαραίτητα ίδιος με τον παραλήπτη */
+const defaultSmtpUser = "ecorehomeconstructions@gmail.com";
 
 type ContactPayload = {
   name: string;
@@ -49,7 +53,7 @@ export async function POST(request: Request) {
     // Προεπιλογές Gmail — αρκεί να οριστεί SMTP_PASS στο .env.local (App Password)
     const host = process.env.SMTP_HOST ?? "smtp.gmail.com";
     const port = process.env.SMTP_PORT ?? "587";
-    const user = process.env.SMTP_USER ?? recipientEmail;
+    const user = process.env.SMTP_USER ?? defaultSmtpUser;
     const pass = process.env.SMTP_PASS;
 
     if (!pass?.trim()) {
@@ -107,7 +111,8 @@ export async function POST(request: Request) {
       { success: "Το μήνυμά σας στάλθηκε με επιτυχία." },
       { status: 200 }
     );
-  } catch {
+  } catch (err) {
+    console.error("[contact] send failed:", err);
     return NextResponse.json(
       { error: "Παρουσιάστηκε σφάλμα κατά την αποστολή. Δοκιμάστε ξανά." },
       { status: 500 }
