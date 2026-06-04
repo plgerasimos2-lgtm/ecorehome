@@ -58,7 +58,7 @@ const testimonials = [
 
 const contactDetails = [
   { label: "Τηλέφωνο", value: "6970652145" },
-  { label: "Email", value: "ecorehomeconstructions@gmail.com" },
+  { label: "Email", value: "info@ecorehomeconstructions.com" },
   { label: "Διεύθυνση", value: "Αθήνα, Ελλάδα" },
 ];
 
@@ -524,8 +524,8 @@ export default function Home() {
             <p id="terms" className="mt-3 text-sm leading-relaxed text-zinc-600">
               Για αιτήματα σχετικά με προσωπικά δεδομένα, μπορείτε να επικοινωνήσετε στο
               {" "}
-              <a href="mailto:ecorehomeconstructions@gmail.com" className="font-medium text-emerald-700 hover:underline">
-                ecorehomeconstructions@gmail.com
+              <a href="mailto:info@ecorehomeconstructions.com" className="font-medium text-emerald-700 hover:underline">
+                info@ecorehomeconstructions.com
               </a>
               {" "}
               ή τηλεφωνικά στο

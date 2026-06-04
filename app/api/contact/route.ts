@@ -4,7 +4,7 @@ import nodemailer from "nodemailer";
 import { syncLeadToHubSpot } from "@/lib/hubspot/sync-lead";
 import type { HubSpotLeadInput } from "@/lib/hubspot/types";
 
-const recipientEmail = "ecorehomeconstructions@gmail.com";
+const recipientEmail = "info@ecorehomeconstructions.com";
 
 type ContactPayload = {
   name: string;
