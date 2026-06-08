@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 
+import { getLocalChatReply } from "@/lib/ai/local-responder";
 import { CHAT_SYSTEM_PROMPT } from "@/lib/ai/system-prompt";
 
 type ChatRole = "user" | "assistant";
@@ -13,23 +14,81 @@ type ChatRequestBody = {
   messages?: ChatMessage[];
 };
 
+type GeminiContent = {
+  role: "user" | "model";
+  parts: { text: string }[];
+};
+
 const MAX_MESSAGES = 20;
 const MAX_MESSAGE_LENGTH = 2000;
 
+function readGeminiApiKey(): string | undefined {
+  const raw = process.env.GEMINI_API_KEY?.trim() || process.env.GOOGLE_API_KEY?.trim();
+  if (!raw) return undefined;
+
+  const unquoted = raw.replace(/^['"]|['"]$/g, "").trim();
+  return unquoted || undefined;
+}
+
+function getLastUserMessage(messages: ChatMessage[]): string | null {
+  for (let i = messages.length - 1; i >= 0; i -= 1) {
+    if (messages[i]?.role === "user") {
+      return messages[i].content;
+    }
+  }
+  return null;
+}
+
+function toGeminiContents(messages: ChatMessage[]): GeminiContent[] {
+  return messages.map((message) => ({
+    role: message.role === "assistant" ? "model" : "user",
+    parts: [{ text: message.content }],
+  }));
+}
+
+async function getGeminiReply(messages: ChatMessage[], apiKey: string): Promise<string | null> {
+  const model = process.env.GEMINI_MODEL?.trim() || "gemini-2.0-flash";
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
+
+  const response = await fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "x-goog-api-key": apiKey,
+    },
+    body: JSON.stringify({
+      systemInstruction: {
+        parts: [{ text: CHAT_SYSTEM_PROMPT }],
+      },
+      contents: toGeminiContents(messages),
+      generationConfig: {
+        temperature: 0.4,
+      },
+    }),
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    console.error("[chat] Gemini error:", response.status, errorText);
+    return null;
+  }
+
+  const data = (await response.json()) as {
+    candidates?: { content?: { parts?: { text?: string }[] } }[];
+  };
+
+  const parts = data.candidates?.[0]?.content?.parts ?? [];
+  const reply = parts
+    .map((part) => part.text?.trim())
+    .filter(Boolean)
+    .join("\n")
+    .trim();
+
+  return reply || null;
+}
+
 export async function POST(request: Request) {
   try {
-    const apiKey = process.env.OPENAI_API_KEY?.trim();
-
-    if (!apiKey) {
-      return NextResponse.json(
-        {
-          error:
-            "Ο βοηθός AI δεν είναι ενεργός: λείπει το OPENAI_API_KEY. Προσθέστε το στο .env.local και κάντε επανεκκίνηση του server.",
-        },
-        { status: 500 }
-      );
-    }
-
     const body = (await request.json()) as ChatRequestBody;
     const incoming = body.messages ?? [];
 
@@ -60,41 +119,27 @@ export async function POST(request: Request) {
       );
     }
 
-    const model = process.env.OPENAI_MODEL?.trim() || "gpt-4o-mini";
+    const apiKey = readGeminiApiKey();
+    let reply: string | null = null;
 
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        model,
-        temperature: 0.4,
-        messages: [{ role: "system", content: CHAT_SYSTEM_PROMPT }, ...messages],
-      }),
-    });
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error("[chat] OpenAI error:", response.status, errorText);
-      return NextResponse.json(
-        { error: "Παρουσιάστηκε πρόβλημα με τον βοηθό. Δοκιμάστε ξανά σε λίγο." },
-        { status: 502 }
-      );
+    if (apiKey) {
+      reply = await getGeminiReply(messages, apiKey);
+      if (!reply) {
+        console.warn("[chat] Gemini failed — using local FAQ replies.");
+      }
+    } else {
+      console.warn("[chat] GEMINI_API_KEY missing — using local FAQ replies.");
     }
 
-    const data = (await response.json()) as {
-      choices?: { message?: { content?: string | null } }[];
-    };
-
-    const reply = data.choices?.[0]?.message?.content?.trim();
-
     if (!reply) {
-      return NextResponse.json(
-        { error: "Δεν λήφθηκε απάντηση. Δοκιμάστε ξανά." },
-        { status: 502 }
-      );
+      const lastUserMessage = getLastUserMessage(messages);
+      if (!lastUserMessage) {
+        return NextResponse.json(
+          { error: "Δεν βρέθηκε μήνυμα χρήστη." },
+          { status: 400 }
+        );
+      }
+      reply = getLocalChatReply(lastUserMessage);
     }
 
     return NextResponse.json({ reply });
