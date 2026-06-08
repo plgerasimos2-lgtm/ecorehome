@@ -53,19 +53,28 @@ export default function ChatBot() {
         body: JSON.stringify({ messages: nextMessages }),
       });
 
-      const data = (await response.json()) as { reply?: string; error?: string };
+      let data: { reply?: string; error?: string } = {};
+      try {
+        data = (await response.json()) as { reply?: string; error?: string };
+      } catch {
+        setError("Το chat δεν είναι διαθέσιμο ακόμα. Κάντε redeploy του site με τον νεότερο κώδικα.");
+        return;
+      }
 
       if (!response.ok) {
         setError(data.error ?? "Παρουσιάστηκε σφάλμα. Δοκιμάστε ξανά.");
         return;
       }
 
-      if (data.reply) {
+      if (data.reply?.trim()) {
         setMessages((current) => [
           ...current,
-          { role: "assistant", content: data.reply! },
+          { role: "assistant", content: data.reply!.trim() },
         ]);
+        return;
       }
+
+      setError("Δεν λήφθηκε απάντηση. Δοκιμάστε ξανά ή καλέστε 6970652145.");
     } catch {
       setError("Αδυναμία σύνδεσης. Ελέγξτε το δίκτυο και δοκιμάστε ξανά.");
     } finally {

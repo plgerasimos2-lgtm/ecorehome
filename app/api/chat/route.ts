@@ -22,12 +22,35 @@ type GeminiContent = {
 const MAX_MESSAGES = 20;
 const MAX_MESSAGE_LENGTH = 2000;
 
-function readGeminiApiKey(): string | undefined {
-  const raw = process.env.GEMINI_API_KEY?.trim() || process.env.GOOGLE_API_KEY?.trim();
-  if (!raw) return undefined;
-
-  const unquoted = raw.replace(/^['"]|['"]$/g, "").trim();
+function cleanEnvValue(value: string | undefined): string | undefined {
+  if (!value?.trim()) return undefined;
+  const unquoted = value.trim().replace(/^['"]|['"]$/g, "").trim();
   return unquoted || undefined;
+}
+
+function readGeminiApiKey(): string | undefined {
+  const candidates = [
+    process.env.GEMINI_API_KEY,
+    process.env.GOOGLE_API_KEY,
+    // Παλιό όνομα στο hosting — αν μπήκε Gemini key εκεί αντί για OpenAI
+    process.env.OPENAI_API_KEY,
+  ];
+
+  for (const candidate of candidates) {
+    const key = cleanEnvValue(candidate);
+    if (!key) continue;
+    // OpenAI keys (sk-...) δεν είναι έγκυρα για Gemini
+    if (key.startsWith("sk-")) continue;
+    return key;
+  }
+
+  return undefined;
+}
+
+function messagesForApi(messages: ChatMessage[]): ChatMessage[] {
+  const firstUserIndex = messages.findIndex((message) => message.role === "user");
+  if (firstUserIndex === -1) return messages;
+  return messages.slice(firstUserIndex);
 }
 
 function getLastUserMessage(messages: ChatMessage[]): string | null {
@@ -46,8 +69,11 @@ function toGeminiContents(messages: ChatMessage[]): GeminiContent[] {
   }));
 }
 
-async function getGeminiReply(messages: ChatMessage[], apiKey: string): Promise<string | null> {
-  const model = process.env.GEMINI_MODEL?.trim() || "gemini-2.0-flash";
+async function requestGemini(
+  messages: ChatMessage[],
+  apiKey: string,
+  model: string
+): Promise<string | null> {
   const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
 
   const response = await fetch(url, {
@@ -60,7 +86,7 @@ async function getGeminiReply(messages: ChatMessage[], apiKey: string): Promise<
       systemInstruction: {
         parts: [{ text: CHAT_SYSTEM_PROMPT }],
       },
-      contents: toGeminiContents(messages),
+      contents: toGeminiContents(messagesForApi(messages)),
       generationConfig: {
         temperature: 0.4,
       },
@@ -69,7 +95,7 @@ async function getGeminiReply(messages: ChatMessage[], apiKey: string): Promise<
 
   if (!response.ok) {
     const errorText = await response.text();
-    console.error("[chat] Gemini error:", response.status, errorText);
+    console.error(`[chat] Gemini error (${model}):`, response.status, errorText);
     return null;
   }
 
@@ -85,6 +111,20 @@ async function getGeminiReply(messages: ChatMessage[], apiKey: string): Promise<
     .trim();
 
   return reply || null;
+}
+
+async function getGeminiReply(messages: ChatMessage[], apiKey: string): Promise<string | null> {
+  const configuredModel = process.env.GEMINI_MODEL?.trim();
+  const models = configuredModel
+    ? [configuredModel]
+    : ["gemini-2.0-flash", "gemini-1.5-flash"];
+
+  for (const model of models) {
+    const reply = await requestGemini(messages, apiKey, model);
+    if (reply) return reply;
+  }
+
+  return null;
 }
 
 export async function POST(request: Request) {
@@ -133,13 +173,9 @@ export async function POST(request: Request) {
 
     if (!reply) {
       const lastUserMessage = getLastUserMessage(messages);
-      if (!lastUserMessage) {
-        return NextResponse.json(
-          { error: "Δεν βρέθηκε μήνυμα χρήστη." },
-          { status: 400 }
-        );
-      }
-      reply = getLocalChatReply(lastUserMessage);
+      reply = lastUserMessage
+        ? getLocalChatReply(lastUserMessage)
+        : "Γεια σας! Πώς μπορώ να σας βοηθήσω; Για προσφορά καλέστε 6970652145 ή χρησιμοποιήστε τη φόρμα επικοινωνίας.";
     }
 
     return NextResponse.json({ reply });
