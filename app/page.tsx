@@ -67,6 +67,7 @@ const navSections = [
   { label: "Σχετικά", href: "#about" },
   { label: "Υπηρεσίες", href: "#services" },
   { label: "Έργα", href: "#projects" },
+  { label: "Οδηγός", href: "/odigos-anakainisis" },
   { label: "Κριτικές", href: "#testimonials" },
 ];
 
