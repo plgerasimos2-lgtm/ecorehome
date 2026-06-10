@@ -558,7 +558,7 @@ export default function Home() {
           <div className="flex flex-wrap items-center gap-3 text-sm text-zinc-700">
             <a
               className="inline-flex items-center gap-2 rounded-full border border-emerald-100 px-4 py-2 transition-all duration-300 hover:-translate-y-0.5 hover:border-emerald-300 hover:text-emerald-700 hover:shadow-sm"
-              href="https://www.tiktok.com/@eco_rehome"
+              href="https://www.tiktok.com/@ecorehome"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="TikTok Eco ReHome"
@@ -566,11 +566,11 @@ export default function Home() {
               <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current" aria-hidden="true">
                 <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.24V2h-3.12v13.36a2.79 2.79 0 1 1-1.91-2.65V9.54a5.93 5.93 0 1 0 5.03 5.86V8.57a7.93 7.93 0 0 0 4.64 1.49V6.94c-.29 0-.58-.09-.87-.25Z" />
               </svg>
-              <span>eco_rehome</span>
+              <span>@ecorehome</span>
             </a>
             <a
               className="inline-flex items-center gap-2 rounded-full border border-emerald-100 px-4 py-2 transition-all duration-300 hover:-translate-y-0.5 hover:border-emerald-300 hover:text-emerald-700 hover:shadow-sm"
-              href="https://www.instagram.com/eco_rehome"
+              href="https://www.instagram.com/ecorehome"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram Eco ReHome"
@@ -578,7 +578,19 @@ export default function Home() {
               <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current" aria-hidden="true">
                 <path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Zm0 1.75a4 4 0 0 0-4 4v8.5a4 4 0 0 0 4 4h8.5a4 4 0 0 0 4-4v-8.5a4 4 0 0 0-4-4h-8.5Zm8.88 1.5a1.12 1.12 0 1 1 0 2.25 1.12 1.12 0 0 1 0-2.25ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 1.75a3.25 3.25 0 1 0 0 6.5 3.25 3.25 0 0 0 0-6.5Z" />
               </svg>
-              <span>eco_rehome</span>
+              <span>@ecorehome</span>
+            </a>
+            <a
+              className="inline-flex items-center gap-2 rounded-full border border-emerald-100 px-4 py-2 transition-all duration-300 hover:-translate-y-0.5 hover:border-emerald-300 hover:text-emerald-700 hover:shadow-sm"
+              href="https://www.facebook.com/people/Eco-ReHome/61590393044322/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook Eco ReHome"
+            >
+              <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current" aria-hidden="true">
+                <path d="M13.5 22v-8.5h2.85l.45-3.3H13.5V8.02c0-.95.26-1.6 1.63-1.6h1.74V3.14c-.3-.04-1.33-.13-2.53-.13-2.5 0-4.22 1.53-4.22 4.33V10.2H7.5v3.3h2.62V22h3.38Z" />
+              </svg>
+              <span>Eco ReHome</span>
             </a>
             <a
               className="inline-flex items-center gap-2 rounded-full border border-emerald-100 px-4 py-2 transition-all duration-300 hover:-translate-y-0.5 hover:border-emerald-300 hover:text-emerald-700 hover:shadow-sm"
