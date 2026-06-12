@@ -8,7 +8,7 @@ import {
   organizationSchema,
   websiteSchema,
 } from "@/lib/seo/json-ld";
-import { DEFAULT_OG_IMAGE, SITE_URL } from "@/lib/seo/site-config";
+import { DEFAULT_OG_IMAGE, SITE_DISPLAY_TITLE, SITE_URL } from "@/lib/seo/site-config";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -31,13 +31,13 @@ export const metadata: Metadata = {
     google: "ollNgK6Idvkh-utroB0XBROYOtw8PhhAFgKsZmexdDw",
   },
   title: {
-    default: "Ανακαινίσεις Αθήνα | Eco ReHome Constructions",
+    default: SITE_DISPLAY_TITLE,
     template: "%s",
   },
   description:
-    "Ανακαινίσεις Αθήνα για κατοικίες, διαμερίσματα και επαγγελματικούς χώρους. Αναλαμβάνουμε ολικές και μερικές ανακαινίσεις με εγγυημένο αποτέλεσμα.",
+    "Ανακαινίσεις Αθήνα για κατοικίες, διαμερίσματα και επαγγελματικούς χώρους. Η Eco ReHome Constructions αναλαμβάνει ολικές και μερικές ανακαινίσεις με εγγυημένο αποτέλεσμα.",
   openGraph: {
-    siteName: "Ανακαινίσεις Αθήνα | Eco ReHome Constructions",
+    siteName: SITE_DISPLAY_TITLE,
     locale: "el_GR",
     type: "website",
     images: [DEFAULT_OG_IMAGE],

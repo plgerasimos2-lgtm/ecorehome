@@ -8,14 +8,14 @@ import SiteHeader from "./components/site-header";
 import BeforeAfterCard from "./components/before-after-card";
 import ContactForm from "./components/contact-form";
 import { buildPageMetadata } from "@/lib/seo/build-metadata";
-import { breadcrumbSchema, faqSchema, localBusinessSchema } from "@/lib/seo/json-ld";
+import { breadcrumbSchema, faqSchema } from "@/lib/seo/json-ld";
 import { HOMEPAGE_SEO_SECTIONS } from "@/lib/seo/homepage-seo-content";
-import { SERVICE_LINKS } from "@/lib/seo/site-config";
+import { SERVICE_LINKS, SITE_DISPLAY_TITLE } from "@/lib/seo/site-config";
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "Ανακαινίσεις Αθήνα | Eco ReHome Constructions",
+  title: SITE_DISPLAY_TITLE,
   description:
-    "Ανακαινίσεις Αθήνα για κατοικίες, διαμερίσματα και επαγγελματικούς χώρους. Αναλαμβάνουμε ολικές και μερικές ανακαινίσεις με εγγυημένο αποτέλεσμα.",
+    "Ανακαινίσεις Αθήνα για κατοικίες, διαμερίσματα και επαγγελματικούς χώρους. Η Eco ReHome Constructions αναλαμβάνει ολικές και μερικές ανακαινίσεις με εγγυημένο αποτέλεσμα.",
   path: "/",
   keywords: [
     "Ανακαινίσεις Αθήνα",
@@ -250,11 +250,7 @@ export default function Home() {
   return (
     <div className="bg-white text-zinc-900 scroll-smooth">
       <JsonLd
-        data={[
-          localBusinessSchema(),
-          faqSchema(faqs),
-          breadcrumbSchema([{ name: "Αρχική", path: "/" }]),
-        ]}
+        data={[faqSchema(faqs), breadcrumbSchema([{ name: "Αρχική", path: "/" }])]}
       />
 
       <SiteHeader currentPath="/" />
@@ -269,9 +265,9 @@ export default function Home() {
               Ανακαινίσεις Αθήνα – Ολικές &amp; Μερικές Ανακαινίσεις Κατοικιών και Επαγγελματικών Χώρων
             </h1>
             <p className="max-w-xl text-lg leading-relaxed text-zinc-600">
-              Η Eco ReHome είναι συνεργείο ανακαινίσεων στην Αθήνα με ολοκληρωμένες λύσεις για
-              διαμερίσματα, κουζίνες, μπάνια και επαγγελματικούς χώρους. Δημιουργούμε χώρους που
-              συνδυάζουν αισθητική, λειτουργικότητα και αντοχή στον χρόνο.
+              Η Eco ReHome Constructions είναι ειδικευμένη εταιρεία για Ανακαινίσεις Αθήνα — με
+              ολοκληρωμένες λύσεις για διαμερίσματα, κουζίνες, μπάνια και επαγγελματικούς χώρους.
+              Δημιουργούμε χώρους που συνδυάζουν αισθητική, λειτουργικότητα και αντοχή στον χρόνο.
             </p>
             <a
               href="#contact"
@@ -319,6 +315,19 @@ export default function Home() {
                     </p>
                   ))}
                 </div>
+                {section.h3 && (
+                  <div className="mt-8 grid gap-6 md:grid-cols-2">
+                    {section.h3.map((item) => (
+                      <article
+                        key={item.title}
+                        className="rounded-2xl border border-emerald-100 bg-white p-6 shadow-sm"
+                      >
+                        <h3 className="text-lg font-semibold text-zinc-900">{item.title}</h3>
+                        <p className="mt-3 text-sm leading-relaxed text-zinc-600">{item.content}</p>
+                      </article>
+                    ))}
+                  </div>
+                )}
               </article>
             ))}
             <div className="mt-10 flex flex-wrap gap-3">
@@ -373,7 +382,7 @@ export default function Home() {
           <div className="mx-auto w-full max-w-6xl px-6 lg:px-8">
             <div className="max-w-3xl space-y-6">
               <h2 className="text-3xl font-semibold tracking-tight text-zinc-900 md:text-4xl">
-                Εταιρεία ανακαινίσεων στην Αθήνα με επαγγελματισμό
+                Η προσέγγισή μας σε κάθε έργο
               </h2>
               <p className="text-lg leading-relaxed text-zinc-600">
                 Στην Eco ReHome επενδύουμε σε σύγχρονες τεχνικές, ποιοτικά υλικά και αυστηρή επίβλεψη έργων. Με περισσότερα από
@@ -421,7 +430,7 @@ export default function Home() {
         <section className="border-y border-emerald-100 bg-emerald-50/40 py-14">
           <div className="mx-auto w-full max-w-6xl px-6 lg:px-8">
             <h2 className="text-2xl font-semibold tracking-tight text-zinc-900 md:text-3xl">
-              Εξειδικευμένες υπηρεσίες ανακαίνισης
+              Εξερευνήστε τις εξειδικευμένες σελίδες μας
             </h2>
             <p className="mt-3 max-w-2xl text-zinc-600">
               Εξερευνήστε τις εξειδικευμένες σελίδες μας για κάθε τύπο έργου στην Αθήνα.

@@ -35,8 +35,9 @@ export function localBusinessSchema() {
     "@id": `${SITE_URL}/#localbusiness`,
     name: BUSINESS.name,
     legalName: BUSINESS.legalName,
+    serviceType: BUSINESS.serviceType,
     description:
-      "Εταιρεία ανακαινίσεων στην Αθήνα. Ολικές και μερικές ανακαινίσεις διαμερισμάτων, κουζινών, μπάνιων και επαγγελματικών χώρων.",
+      "Ανακαινίσεις Αθήνα — ολικές και μερικές ανακαινίσεις διαμερισμάτων, κουζινών, μπάνιων και επαγγελματικών χώρων.",
     url: SITE_URL,
     image: `${SITE_URL}/ecorehome-logo.png`,
     logo: `${SITE_URL}/ecorehome-logo.png`,

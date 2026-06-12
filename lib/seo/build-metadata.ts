@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { BUSINESS, DEFAULT_OG_IMAGE, SITE_URL } from "./site-config";
+import { DEFAULT_OG_IMAGE, SITE_DISPLAY_TITLE, SITE_URL } from "./site-config";
 
 type PageSeoInput = {
   title: string;
@@ -30,7 +30,7 @@ export function buildPageMetadata({
       title,
       description,
       url: canonical,
-      siteName: BUSINESS.name,
+      siteName: SITE_DISPLAY_TITLE,
       locale: "el_GR",
       type: ogType,
       images: [DEFAULT_OG_IMAGE],

@@ -1,7 +1,9 @@
 export const SITE_URL = "https://ecorehomeconstructions.com";
 
+export const SITE_DISPLAY_TITLE = "Ανακαινίσεις Αθήνα | Eco ReHome Constructions";
+
 export const BUSINESS = {
-  name: "Ανακαινίσεις Αθήνα | Eco ReHome Constructions",
+  name: "Eco ReHome Constructions",
   legalName: "Eco ReHome Constructions",
   phone: "+306970652145",
   phoneDisplay: "6970652145",
@@ -17,7 +19,8 @@ export const BUSINESS = {
     latitude: 37.9838,
     longitude: 23.7275,
   },
-  areaServed: ["Αθήνα", "Αττική", "Γλυφάδα", "Κηφισιά", "Μαρούσι", "Πειραιάς"],
+  areaServed: ["Athens", "Αθήνα", "Αττική", "Γλυφάδα", "Κηφισιά", "Μαρούσι", "Πειραιάς"],
+  serviceType: "Home Renovation",
   priceRange: "€€",
   foundingYear: 2014,
   projectsCompleted: 200,
