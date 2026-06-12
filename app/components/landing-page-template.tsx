@@ -6,6 +6,7 @@ import SiteHeader from "@/app/components/site-header";
 import {
   breadcrumbSchema,
   faqSchema,
+  localBusinessSchema,
   serviceSchema,
 } from "@/lib/seo/json-ld";
 import type { LandingPageConfig } from "@/lib/seo/landing-pages";
@@ -30,6 +31,7 @@ export default function LandingPageTemplate({ config }: LandingPageTemplateProps
     <div className="min-h-full bg-white text-zinc-900">
       <JsonLd
         data={[
+          localBusinessSchema(),
           breadcrumbs,
           serviceSchema({
             name: config.h1,

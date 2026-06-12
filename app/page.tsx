@@ -8,14 +8,14 @@ import SiteHeader from "./components/site-header";
 import BeforeAfterCard from "./components/before-after-card";
 import ContactForm from "./components/contact-form";
 import { buildPageMetadata } from "@/lib/seo/build-metadata";
-import { faqSchema, localBusinessSchema } from "@/lib/seo/json-ld";
-import { HOMEPAGE_SEO_SECTION } from "@/lib/seo/homepage-seo-content";
+import { breadcrumbSchema, faqSchema, localBusinessSchema } from "@/lib/seo/json-ld";
+import { HOMEPAGE_SEO_SECTIONS } from "@/lib/seo/homepage-seo-content";
 import { SERVICE_LINKS } from "@/lib/seo/site-config";
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "Ανακαινίσεις Αθήνα | Εταιρεία Ανακαινίσεων – Eco ReHome",
+  title: "Ανακαινίσεις Αθήνα | Eco ReHome Constructions",
   description:
-    "Ανακαινίσεις Αθήνα & ανακαίνιση διαμερίσματος από εταιρεία ανακαινίσεων με 10+ χρόνια εμπειρίας. Ολικές & μερικές ανακαινίσεις, δωρεάν εκτίμηση, 200+ έργα.",
+    "Ανακαινίσεις Αθήνα για κατοικίες, διαμερίσματα και επαγγελματικούς χώρους. Αναλαμβάνουμε ολικές και μερικές ανακαινίσεις με εγγυημένο αποτέλεσμα.",
   path: "/",
   keywords: [
     "Ανακαινίσεις Αθήνα",
@@ -130,11 +130,15 @@ const beforeAfterProjects = [
     title: "Διαγράμμιση διαβάτη — επαγγελματικός χώρος",
     beforeImage: "/before-pedestrian-crossing.png",
     afterImage: "/after-pedestrian-crossing.png",
+    beforeAlt: "Επαγγελματικός χώρος πριν την ανακαίνιση διαγράμμισης – Αθήνα",
+    afterAlt: "Επαγγελματικός χώρος μετά την ανακαίνιση διαγράμμισης – Eco ReHome",
   },
   {
     title: "Ανακαίνιση μπάνιου",
     beforeImage: "/before-bathroom-renovation.png",
     afterImage: "/after-bathroom-renovation.png",
+    beforeAlt: "Μπάνιο πριν την ανακαίνιση – κατάσταση πριν τις εργασίες",
+    afterAlt: "Μπάνιο μετά την ανακαίνιση – σύγχρονο αποτέλεσμα Eco ReHome Αθήνα",
   },
 ];
 
@@ -245,7 +249,13 @@ function ReasonIcon({ icon }: { icon: string }) {
 export default function Home() {
   return (
     <div className="bg-white text-zinc-900 scroll-smooth">
-      <JsonLd data={[localBusinessSchema(), faqSchema(faqs)]} />
+      <JsonLd
+        data={[
+          localBusinessSchema(),
+          faqSchema(faqs),
+          breadcrumbSchema([{ name: "Αρχική", path: "/" }]),
+        ]}
+      />
 
       <SiteHeader currentPath="/" />
 
@@ -256,7 +266,7 @@ export default function Home() {
               Εταιρεία ανακαινίσεων στην Αθήνα · 10+ χρόνια εμπειρίας
             </p>
             <h1 className="text-4xl font-semibold leading-tight tracking-tight text-zinc-900 md:text-5xl">
-              Ανακαινίσεις Αθήνα – Ολικές &amp; Μερικές Ανακαινίσεις Κατοικιών
+              Ανακαινίσεις Αθήνα – Ολικές &amp; Μερικές Ανακαινίσεις Κατοικιών και Επαγγελματικών Χώρων
             </h1>
             <p className="max-w-xl text-lg leading-relaxed text-zinc-600">
               Η Eco ReHome είναι συνεργείο ανακαινίσεων στην Αθήνα με ολοκληρωμένες λύσεις για
@@ -297,27 +307,20 @@ export default function Home() {
           className="border-b border-emerald-100 bg-zinc-50/80 py-16"
         >
           <div className="mx-auto w-full max-w-6xl px-6 lg:px-8">
-            <h2 className="text-3xl font-semibold tracking-tight text-zinc-900 md:text-4xl">
-              {HOMEPAGE_SEO_SECTION.h2}
-            </h2>
-            <div className="mt-6 max-w-4xl space-y-5">
-              {HOMEPAGE_SEO_SECTION.paragraphs.map((paragraph) => (
-                <p key={paragraph.slice(0, 50)} className="text-lg leading-relaxed text-zinc-600">
-                  {paragraph}
-                </p>
-              ))}
-            </div>
-            <div className="mt-10 grid gap-6 md:grid-cols-2">
-              {HOMEPAGE_SEO_SECTION.h3Sections.map((section) => (
-                <article
-                  key={section.title}
-                  className="rounded-2xl border border-emerald-100 bg-white p-6 shadow-sm"
-                >
-                  <h3 className="text-xl font-semibold text-zinc-900">{section.title}</h3>
-                  <p className="mt-3 text-base leading-relaxed text-zinc-600">{section.content}</p>
-                </article>
-              ))}
-            </div>
+            {HOMEPAGE_SEO_SECTIONS.map((section) => (
+              <article key={section.h2} className="mb-12 last:mb-0">
+                <h2 className="text-3xl font-semibold tracking-tight text-zinc-900 md:text-4xl">
+                  {section.h2}
+                </h2>
+                <div className="mt-6 max-w-4xl space-y-5">
+                  {section.paragraphs.map((paragraph) => (
+                    <p key={paragraph.slice(0, 50)} className="text-lg leading-relaxed text-zinc-600">
+                      {paragraph}
+                    </p>
+                  ))}
+                </div>
+              </article>
+            ))}
             <div className="mt-10 flex flex-wrap gap-3">
               <Link
                 href="/anakainiseis-athina"
@@ -491,6 +494,8 @@ export default function Home() {
                   title={project.title}
                   beforeImage={project.beforeImage}
                   afterImage={project.afterImage}
+                  beforeAlt={project.beforeAlt}
+                  afterAlt={project.afterAlt}
                 />
               ))}
             </div>

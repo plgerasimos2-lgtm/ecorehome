@@ -31,11 +31,11 @@ export const metadata: Metadata = {
     google: "ollNgK6Idvkh-utroB0XBROYOtw8PhhAFgKsZmexdDw",
   },
   title: {
-    default: "Ανακαινίσεις Αθήνα | Εταιρεία Ανακαινίσεων – Eco ReHome",
+    default: "Ανακαινίσεις Αθήνα | Eco ReHome Constructions",
     template: "%s",
   },
   description:
-    "Ανακαινίσεις Αθήνα & ανακαίνιση διαμερίσματος από εταιρεία ανακαινίσεων. Ολικές & μερικές ανακαινίσεις, δωρεάν εκτίμηση, 200+ έργα.",
+    "Ανακαινίσεις Αθήνα για κατοικίες, διαμερίσματα και επαγγελματικούς χώρους. Αναλαμβάνουμε ολικές και μερικές ανακαινίσεις με εγγυημένο αποτέλεσμα.",
   openGraph: {
     siteName: "Eco ReHome",
     locale: "el_GR",
