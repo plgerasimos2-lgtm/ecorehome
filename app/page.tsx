@@ -4,62 +4,64 @@ import Link from "next/link";
 
 import JsonLd from "./components/json-ld";
 import SiteFooter from "./components/site-footer";
+import SiteHeader from "./components/site-header";
 import BeforeAfterCard from "./components/before-after-card";
 import ContactForm from "./components/contact-form";
 import { buildPageMetadata } from "@/lib/seo/build-metadata";
-import { faqSchema } from "@/lib/seo/json-ld";
+import { faqSchema, localBusinessSchema } from "@/lib/seo/json-ld";
+import { HOMEPAGE_SEO_SECTION } from "@/lib/seo/homepage-seo-content";
 import { SERVICE_LINKS } from "@/lib/seo/site-config";
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "Ανακαινίσεις Αθήνα | Eco ReHome – Εταιρεία & Συνεργείο Ανακαινίσεων",
+  title: "Ανακαινίσεις Αθήνα | Εταιρεία Ανακαινίσεων – Eco ReHome",
   description:
-    "Eco ReHome: εταιρεία και συνεργείο ανακαινίσεων στην Αθήνα. Ανακαίνιση διαμερίσματος, κουζίνας, μπάνιου, ολική ανακαίνιση. 10+ χρόνια, 200+ έργα, δωρεάν εκτίμηση.",
+    "Ανακαινίσεις Αθήνα & ανακαίνιση διαμερίσματος από εταιρεία ανακαινίσεων με 10+ χρόνια εμπειρίας. Ολικές & μερικές ανακαινίσεις, δωρεάν εκτίμηση, 200+ έργα.",
   path: "/",
   keywords: [
     "Ανακαινίσεις Αθήνα",
+    "Ανακαίνιση Διαμερίσματος Αθήνα",
     "Εταιρεία Ανακαινίσεων Αθήνα",
     "Συνεργείο Ανακαινίσεων Αθήνα",
     "Ανακαινίσεις Κατοικιών Αθήνα",
-    "Ανακαινίσεις Επαγγελματικών Χώρων Αθήνα",
   ],
 });
 
 const services = [
   {
-    title: "Ανακαίνιση Σπιτιών",
+    title: "Ανακαίνιση Διαμερίσματος",
     description:
-      "Ολοκληρωμένες λύσεις για πλήρη ανανέωση κατοικίας με έμφαση στην αισθητική και τη λειτουργικότητα.",
+      "Ολοκληρωμένες λύσεις για ανακαίνιση διαμερίσματος στην Αθήνα με έμφαση στην αισθητική και τη λειτουργικότητα.",
     href: "/anakainisi-diamerismatos-athina",
   },
   {
-    title: "Ανακαίνιση Μαγαζιών",
+    title: "Ανακαίνιση Μπάνιου",
     description:
-      "Αναβαθμίζουμε εμπορικούς χώρους ώστε να αποδίδουν καλύτερα και να προσφέρουν δυνατή εικόνα στους πελάτες.",
-    href: "/oliki-anakainisi-athina",
-  },
-  {
-    title: "Επαγγελματικοί Χώροι",
-    description:
-      "Διαμορφώνουμε σύγχρονους επαγγελματικούς χώρους που ενισχύουν την παραγωγικότητα και την καθημερινή άνεση.",
-    href: "/oliki-anakainisi-athina",
-  },
-  {
-    title: "Μερικές Επεμβάσεις",
-    description:
-      "Στοχευμένες παρεμβάσεις σε επιλεγμένα σημεία του χώρου για άμεση βελτίωση με ελεγχόμενο κόστος.",
+      "Σύγχρονη ανακαίνιση μπάνιου με στεγάνωση, ποιοτικά υλικά και προσεγμένη τοποθέτηση.",
     href: "/anakainisi-mpaniou-athina",
   },
   {
-    title: "Σχεδιασμός Εσωτερικού",
+    title: "Ανακαίνιση Κουζίνας",
     description:
-      "Προτείνουμε έξυπνες λύσεις διαρρύθμισης και διακόσμησης που αναδεικνύουν το στυλ και τις ανάγκες σας.",
-    href: "/anakainisi-diamerismatos-athina",
+      "Σχεδιάζουμε λειτουργικές κουζίνες με έξυπνο layout, αποθήκευση και σύγχρονο design.",
+    href: "/anakainisi-kouzinas-athina",
   },
   {
-    title: "Ενεργειακή Αναβάθμιση",
+    title: "Ολική Ανακαίνιση",
     description:
-      "Εφαρμόζουμε σύγχρονες τεχνικές εξοικονόμησης ενέργειας για πιο αποδοτικό και οικονομικό κτίριο.",
+      "Πλήρης ανανέωση κατοικίας με ενιαίο χρονοδιάγραμμα, συντονισμό επαγγελμάτων και συνεπές αποτέλεσμα.",
     href: "/oliki-anakainisi-athina",
+  },
+  {
+    title: "Ανακαινίσεις Κατοικιών",
+    description:
+      "Ολικές και μερικές ανακαινίσεις στην Αθήνα — από στοχευμένες παρεμβάσεις μέχρι πλήρη ανανέωση.",
+    href: "/anakainiseis-athina",
+  },
+  {
+    title: "Κόστος Ανακαίνισης",
+    description:
+      "Τι επηρεάζει το κόστος ανακαίνισης διαμερίσματος; Διαφανής εκτίμηση και δωρεάν πρώτη προσφορά.",
+    href: "/kostos-anakainisis-diamerismatos-athina",
   },
 ];
 
@@ -88,15 +90,6 @@ const contactDetails = [
   { label: "Τηλέφωνο", value: "6970652145" },
   { label: "Email", value: "info@ecorehomeconstructions.com" },
   { label: "Διεύθυνση", value: "Αθήνα, Ελλάδα" },
-];
-
-const navSections = [
-  { label: "Αρχική", href: "#" },
-  { label: "Σχετικά", href: "#about" },
-  { label: "Υπηρεσίες", href: "#services" },
-  { label: "Έργα", href: "#projects" },
-  { label: "Οδηγός", href: "/odigos-anakainisis" },
-  { label: "Κριτικές", href: "#testimonials" },
 ];
 
 const projectImages = [
@@ -252,42 +245,9 @@ function ReasonIcon({ icon }: { icon: string }) {
 export default function Home() {
   return (
     <div className="bg-white text-zinc-900 scroll-smooth">
-      <JsonLd data={faqSchema(faqs)} />
+      <JsonLd data={[localBusinessSchema(), faqSchema(faqs)]} />
 
-      <header className="sticky top-0 z-20 border-b border-emerald-100/70 bg-white/90 backdrop-blur">
-        <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-4 lg:px-8">
-          <a href="#" className="flex items-center gap-3">
-            <Image
-              src="/ecorehome-logo.png"
-              alt="Eco ReHome – Ανακαινίσεις Αθήνα"
-              width={44}
-              height={44}
-              className="rounded-md border border-emerald-200"
-              priority
-            />
-            <p className="text-lg font-semibold tracking-tight text-emerald-700">
-              Eco ReHome
-            </p>
-          </a>
-          <nav className="hidden items-center gap-2 md:flex" aria-label="Κύρια πλοήγηση">
-            {navSections.map((section) => (
-              <a
-                key={section.label}
-                href={section.href}
-                className="relative rounded-full px-3 py-2 text-sm font-medium text-zinc-700 transition-all duration-300 hover:bg-emerald-50 hover:text-emerald-700 after:absolute after:bottom-1 after:left-3 after:h-0.5 after:w-0 after:rounded-full after:bg-emerald-500 after:transition-all after:duration-300 hover:after:w-[calc(100%-1.5rem)]"
-              >
-                {section.label}
-              </a>
-            ))}
-          </nav>
-          <a
-            href="#contact"
-            className="rounded-full border border-emerald-200 px-4 py-2 text-sm font-medium text-emerald-700 transition-all duration-300 hover:-translate-y-0.5 hover:border-emerald-300 hover:bg-emerald-50 hover:shadow-sm"
-          >
-            Επικοινωνία
-          </a>
-        </div>
-      </header>
+      <SiteHeader currentPath="/" />
 
       <main>
         <section className="mx-auto grid w-full max-w-6xl gap-12 px-6 py-20 lg:grid-cols-2 lg:items-center lg:px-8 lg:py-28">
@@ -296,7 +256,7 @@ export default function Home() {
               Εταιρεία ανακαινίσεων στην Αθήνα · 10+ χρόνια εμπειρίας
             </p>
             <h1 className="text-4xl font-semibold leading-tight tracking-tight text-zinc-900 md:text-5xl">
-              Ανακαινίσεις στην Αθήνα με ποιότητα &amp; στυλ
+              Ανακαινίσεις Αθήνα – Ολικές &amp; Μερικές Ανακαινίσεις Κατοικιών
             </h1>
             <p className="max-w-xl text-lg leading-relaxed text-zinc-600">
               Η Eco ReHome είναι συνεργείο ανακαινίσεων στην Αθήνα με ολοκληρωμένες λύσεις για
@@ -327,6 +287,68 @@ export default function Home() {
                   Ποιότητα κατασκευής και premium αποτέλεσμα σε κάθε έργο.
                 </p>
               </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="seo-content"
+          aria-label="Ανακαινίσεις Αθήνα – πληροφορίες"
+          className="border-b border-emerald-100 bg-zinc-50/80 py-16"
+        >
+          <div className="mx-auto w-full max-w-6xl px-6 lg:px-8">
+            <h2 className="text-3xl font-semibold tracking-tight text-zinc-900 md:text-4xl">
+              {HOMEPAGE_SEO_SECTION.h2}
+            </h2>
+            <div className="mt-6 max-w-4xl space-y-5">
+              {HOMEPAGE_SEO_SECTION.paragraphs.map((paragraph) => (
+                <p key={paragraph.slice(0, 50)} className="text-lg leading-relaxed text-zinc-600">
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+            <div className="mt-10 grid gap-6 md:grid-cols-2">
+              {HOMEPAGE_SEO_SECTION.h3Sections.map((section) => (
+                <article
+                  key={section.title}
+                  className="rounded-2xl border border-emerald-100 bg-white p-6 shadow-sm"
+                >
+                  <h3 className="text-xl font-semibold text-zinc-900">{section.title}</h3>
+                  <p className="mt-3 text-base leading-relaxed text-zinc-600">{section.content}</p>
+                </article>
+              ))}
+            </div>
+            <div className="mt-10 flex flex-wrap gap-3">
+              <Link
+                href="/anakainiseis-athina"
+                className="rounded-full border border-emerald-200 bg-white px-4 py-2 text-sm font-medium text-emerald-800 transition hover:border-emerald-300 hover:bg-emerald-50"
+              >
+                Ανακαινίσεις Αθήνα
+              </Link>
+              <Link
+                href="/anakainisi-diamerismatos-athina"
+                className="rounded-full border border-emerald-200 bg-white px-4 py-2 text-sm font-medium text-emerald-800 transition hover:border-emerald-300 hover:bg-emerald-50"
+              >
+                Ανακαίνιση Διαμερίσματος Αθήνα
+              </Link>
+              <Link
+                href="/anakainisi-mpaniou-athina"
+                className="rounded-full border border-emerald-200 bg-white px-4 py-2 text-sm font-medium text-emerald-800 transition hover:border-emerald-300 hover:bg-emerald-50"
+              >
+                Ανακαίνιση Μπάνιου Αθήνα
+              </Link>
+              <Link
+                href="/anakainisi-kouzinas-athina"
+                className="rounded-full border border-emerald-200 bg-white px-4 py-2 text-sm font-medium text-emerald-800 transition hover:border-emerald-300 hover:bg-emerald-50"
+              >
+                Ανακαίνιση Κουζίνας Αθήνα
+              </Link>
+              <Link
+                href="/oliki-anakainisi-athina"
+                className="rounded-full border border-emerald-200 bg-white px-4 py-2 text-sm font-medium text-emerald-800 transition hover:border-emerald-300 hover:bg-emerald-50"
+              >
+                Ολική Ανακαίνιση Αθήνα
+              </Link>
             </div>
           </div>
         </section>

@@ -10,6 +10,7 @@ import {
 } from "@/lib/seo/json-ld";
 import type { LandingPageConfig } from "@/lib/seo/landing-pages";
 import { LANDING_PAGES } from "@/lib/seo/landing-pages";
+import { SERVICE_LINKS } from "@/lib/seo/site-config";
 
 type LandingPageTemplateProps = {
   config: LandingPageConfig;
@@ -126,12 +127,22 @@ export default function LandingPageTemplate({ config }: LandingPageTemplateProps
                     {page.h1}
                   </Link>
                 ))}
-                <Link
-                  href="/odigos-anakainisis"
-                  className="rounded-full border border-emerald-200 bg-white px-4 py-2 text-sm font-medium text-emerald-800 transition hover:border-emerald-300 hover:bg-emerald-50"
-                >
-                  Οδηγός Ανακαίνισης (PDF)
-                </Link>
+              </div>
+              <h3 className="mt-10 text-lg font-semibold text-zinc-900">Όλες οι υπηρεσίες ανακαίνισης</h3>
+              <div className="mt-4 flex flex-wrap gap-3">
+                {SERVICE_LINKS.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={`rounded-full border px-4 py-2 text-sm font-medium transition hover:border-emerald-300 hover:bg-emerald-50 ${
+                      link.href === config.path
+                        ? "border-emerald-400 bg-emerald-100 text-emerald-900"
+                        : "border-emerald-200 bg-white text-emerald-800"
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
               </div>
             </div>
           </section>

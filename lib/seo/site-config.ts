@@ -37,6 +37,10 @@ export const DEFAULT_OG_IMAGE = {
 
 export const SERVICE_LINKS = [
   {
+    href: "/anakainiseis-athina",
+    label: "Ανακαινίσεις Αθήνα",
+  },
+  {
     href: "/anakainisi-diamerismatos-athina",
     label: "Ανακαίνιση Διαμερίσματος Αθήνα",
   },

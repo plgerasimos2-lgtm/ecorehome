@@ -22,7 +22,7 @@ export default function SiteHeader({ currentPath }: SiteHeaderProps) {
           />
           <p className="text-lg font-semibold tracking-tight text-emerald-700">Eco ReHome</p>
         </Link>
-        <nav className="hidden items-center gap-2 md:flex" aria-label="Κύρια πλοήγηση">
+        <nav className="hidden items-center gap-1 lg:gap-2 md:flex" aria-label="Κύρια πλοήγηση">
           <Link
             href="/"
             className={`rounded-full px-3 py-2 text-sm font-medium transition hover:bg-emerald-50 hover:text-emerald-700 ${
@@ -31,7 +31,7 @@ export default function SiteHeader({ currentPath }: SiteHeaderProps) {
           >
             Αρχική
           </Link>
-          {SERVICE_LINKS.slice(0, 4).map((link) => (
+          {SERVICE_LINKS.slice(0, 5).map((link) => (
             <Link
               key={link.href}
               href={link.href}
@@ -39,7 +39,13 @@ export default function SiteHeader({ currentPath }: SiteHeaderProps) {
                 currentPath === link.href ? "bg-emerald-50 text-emerald-700" : "text-zinc-700"
               }`}
             >
-              {link.label.replace(" Αθήνα", "")}
+              {link.label
+                .replace(" Αθήνα", "")
+                .replace("Ανακαίνιση Διαμερίσματος", "Διαμέρισμα")
+                .replace("Ανακαίνιση Μπάνιου", "Μπάνιο")
+                .replace("Ανακαίνιση Κουζίνας", "Κουζίνα")
+                .replace("Ολική Ανακαίνιση", "Ολική")
+                .replace("Κόστος Ανακαίνισης Διαμερίσματος", "Κόστος")}
             </Link>
           ))}
           <Link

@@ -31,14 +31,19 @@ export function organizationSchema() {
 export function localBusinessSchema() {
   return {
     "@context": "https://schema.org",
-    "@type": "HomeAndConstructionBusiness",
+    "@type": ["LocalBusiness", "HomeAndConstructionBusiness"],
     "@id": `${SITE_URL}/#localbusiness`,
     name: BUSINESS.name,
+    legalName: BUSINESS.legalName,
+    description:
+      "Εταιρεία ανακαινίσεων στην Αθήνα. Ολικές και μερικές ανακαινίσεις διαμερισμάτων, κουζινών, μπάνιων και επαγγελματικών χώρων.",
     url: SITE_URL,
     image: `${SITE_URL}/ecorehome-logo.png`,
+    logo: `${SITE_URL}/ecorehome-logo.png`,
     telephone: BUSINESS.phone,
     email: BUSINESS.email,
     priceRange: BUSINESS.priceRange,
+    foundingDate: String(BUSINESS.foundingYear),
     address: {
       "@type": "PostalAddress",
       streetAddress: BUSINESS.address.streetAddress,
@@ -61,6 +66,49 @@ export function localBusinessSchema() {
       dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
       opens: "09:00",
       closes: "18:00",
+    },
+    sameAs: [
+      BUSINESS.social.instagram,
+      BUSINESS.social.tiktok,
+      BUSINESS.social.facebook,
+    ],
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Υπηρεσίες Ανακαίνισης Αθήνα",
+      itemListElement: [
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Ανακαίνιση Διαμερίσματος Αθήνα",
+            url: `${SITE_URL}/anakainisi-diamerismatos-athina`,
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Ανακαίνιση Μπάνιου Αθήνα",
+            url: `${SITE_URL}/anakainisi-mpaniou-athina`,
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Ανακαίνιση Κουζίνας Αθήνα",
+            url: `${SITE_URL}/anakainisi-kouzinas-athina`,
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Ολική Ανακαίνιση Αθήνα",
+            url: `${SITE_URL}/oliki-anakainisi-athina`,
+          },
+        },
+      ],
     },
   };
 }
