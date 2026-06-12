@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   description:
     "Ανακαινίσεις Αθήνα για κατοικίες, διαμερίσματα και επαγγελματικούς χώρους. Αναλαμβάνουμε ολικές και μερικές ανακαινίσεις με εγγυημένο αποτέλεσμα.",
   openGraph: {
-    siteName: "Eco ReHome",
+    siteName: "Ανακαινίσεις Αθήνα | Eco ReHome Constructions",
     locale: "el_GR",
     type: "website",
     images: [DEFAULT_OG_IMAGE],
