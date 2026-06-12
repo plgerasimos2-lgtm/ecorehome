@@ -19,6 +19,9 @@ export default function BeforeAfterCard({
   return (
     <article className="rounded-3xl border border-emerald-100 bg-white p-5 shadow-sm">
       <h3 className="mb-4 text-xl font-semibold tracking-tight text-zinc-900">{title}</h3>
+      <p className="sr-only">
+        Σύγκριση πριν και μετά: {title}. Αριστερά η κατάσταση πριν την ανακαίνιση, δεξιά μετά.
+      </p>
 
       <div className="relative overflow-hidden rounded-2xl border border-emerald-100">
         <div

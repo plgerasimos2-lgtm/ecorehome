@@ -2,54 +2,49 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
 import ChatBot from "./components/chat-bot";
+import JsonLd from "./components/json-ld";
+import {
+  localBusinessSchema,
+  organizationSchema,
+  websiteSchema,
+} from "@/lib/seo/json-ld";
+import { DEFAULT_OG_IMAGE, SITE_URL } from "@/lib/seo/site-config";
 import "./globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap",
+  preload: true,
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
+  preload: false,
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://ecorehomeconstructions.com"),
+  metadataBase: new URL(SITE_URL),
   verification: {
     google: "ollNgK6Idvkh-utroB0XBROYOtw8PhhAFgKsZmexdDw",
   },
-  title: "Eco ReHome",
-  description: "Η Eco ReHome προσφέρει επαγγελματικές ανακαινίσεις σπιτιών, κουζινών και μπάνιων στην Αθήνα με 10+ χρόνια εμπειρίας και 200+ ολοκληρωμένα έργα.",
-  keywords: [
-    "ανακαινίσεις Αθήνα",
-    "ανακαίνιση σπιτιού",
-    "ανακαίνιση κουζίνας",
-    "ανακαίνιση μπάνιου",
-    "επαγγελματικοί χώροι",
-    "ενεργειακή αναβάθμιση",
-    "Eco ReHome",
-  ],
+  title: {
+    default: "Ανακαινίσεις Αθήνα | Eco ReHome",
+    template: "%s",
+  },
+  description:
+    "Eco ReHome – εταιρεία ανακαινίσεων στην Αθήνα. Ανακαίνιση διαμερίσματος, κουζίνας, μπάνιου και επαγγελματικών χώρων.",
   openGraph: {
-    title: "Eco ReHome",
-    description:
-      "Ανακαινίσεις σπιτιών και επαγγελματικών χώρων με ποιότητα, συνέπεια και σύγχρονο σχεδιασμό.",
+    siteName: "Eco ReHome",
     locale: "el_GR",
     type: "website",
-    images: [
-      {
-        url: "/ecorehome-logo.png",
-        width: 512,
-        height: 512,
-        alt: "Λογότυπο Eco ReHome",
-      },
-    ],
+    images: [DEFAULT_OG_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Eco ReHome",
-    description: "Ανακαινίσεις με ποιότητα και στυλ.",
-    images: ["/ecorehome-logo.png"],
+    images: [DEFAULT_OG_IMAGE.url],
   },
 };
 
@@ -63,7 +58,14 @@ export default function RootLayout({
       lang="el"
       className={`${geistSans.variable} ${geistMono.variable} h-full scroll-smooth antialiased`}
     >
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      </head>
       <body className="min-h-full flex flex-col">
+        <JsonLd
+          data={[organizationSchema(), localBusinessSchema(), websiteSchema()]}
+        />
         {children}
         <ChatBot />
       </body>

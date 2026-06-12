@@ -1,37 +1,65 @@
+import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
+
+import JsonLd from "./components/json-ld";
+import SiteFooter from "./components/site-footer";
 import BeforeAfterCard from "./components/before-after-card";
 import ContactForm from "./components/contact-form";
+import { buildPageMetadata } from "@/lib/seo/build-metadata";
+import { faqSchema } from "@/lib/seo/json-ld";
+import { SERVICE_LINKS } from "@/lib/seo/site-config";
+
+export const metadata: Metadata = buildPageMetadata({
+  title: "Ανακαινίσεις Αθήνα | Eco ReHome – Εταιρεία & Συνεργείο Ανακαινίσεων",
+  description:
+    "Eco ReHome: εταιρεία και συνεργείο ανακαινίσεων στην Αθήνα. Ανακαίνιση διαμερίσματος, κουζίνας, μπάνιου, ολική ανακαίνιση. 10+ χρόνια, 200+ έργα, δωρεάν εκτίμηση.",
+  path: "/",
+  keywords: [
+    "Ανακαινίσεις Αθήνα",
+    "Εταιρεία Ανακαινίσεων Αθήνα",
+    "Συνεργείο Ανακαινίσεων Αθήνα",
+    "Ανακαινίσεις Κατοικιών Αθήνα",
+    "Ανακαινίσεις Επαγγελματικών Χώρων Αθήνα",
+  ],
+});
 
 const services = [
   {
     title: "Ανακαίνιση Σπιτιών",
     description:
       "Ολοκληρωμένες λύσεις για πλήρη ανανέωση κατοικίας με έμφαση στην αισθητική και τη λειτουργικότητα.",
+    href: "/anakainisi-diamerismatos-athina",
   },
   {
     title: "Ανακαίνιση Μαγαζιών",
     description:
       "Αναβαθμίζουμε εμπορικούς χώρους ώστε να αποδίδουν καλύτερα και να προσφέρουν δυνατή εικόνα στους πελάτες.",
+    href: "/oliki-anakainisi-athina",
   },
   {
     title: "Επαγγελματικοί Χώροι",
     description:
       "Διαμορφώνουμε σύγχρονους επαγγελματικούς χώρους που ενισχύουν την παραγωγικότητα και την καθημερινή άνεση.",
+    href: "/oliki-anakainisi-athina",
   },
   {
     title: "Μερικές Επεμβάσεις",
     description:
       "Στοχευμένες παρεμβάσεις σε επιλεγμένα σημεία του χώρου για άμεση βελτίωση με ελεγχόμενο κόστος.",
+    href: "/anakainisi-mpaniou-athina",
   },
   {
     title: "Σχεδιασμός Εσωτερικού",
     description:
       "Προτείνουμε έξυπνες λύσεις διαρρύθμισης και διακόσμησης που αναδεικνύουν το στυλ και τις ανάγκες σας.",
+    href: "/anakainisi-diamerismatos-athina",
   },
   {
     title: "Ενεργειακή Αναβάθμιση",
     description:
       "Εφαρμόζουμε σύγχρονες τεχνικές εξοικονόμησης ενέργειας για πιο αποδοτικό και οικονομικό κτίριο.",
+    href: "/oliki-anakainisi-athina",
   },
 ];
 
@@ -75,26 +103,32 @@ const projectImages = [
   {
     title: "Μπάνιο με ψηλά ντουλάπια αποθήκευσης",
     image: "/project-bathroom-storage.png",
+    alt: "Ανακαίνιση μπάνιου με ντουλάπια αποθήκευσης – Eco ReHome Αθήνα",
   },
   {
     title: "Τοίχος τηλεόρασης & ειδική κατασκευή",
     image: "/project-tv-wall.png",
+    alt: "Ειδική κατασκευή τοίχου τηλεόρασης – ανακαίνιση κατοικίας Αθήνα",
   },
   {
     title: "Καθιστικό με parquet και μπαλκόνι",
     image: "/project-living-parquet.png",
+    alt: "Ανακαίνιση καθιστικού με parquet – Eco ReHome",
   },
   {
     title: "Περίφραξη & είσοδος κατοικίας",
     image: "/project-exterior-fence.png",
+    alt: "Εξωτερική ανακαίνιση εισόδου κατοικίας – Αθήνα",
   },
   {
     title: "Μπάνιο minimal με έπιπλο νιπτήρα",
     image: "/project-bathroom-minimal.png",
+    alt: "Minimal ανακαίνιση μπάνιου με έπιπλο νιπτήρα – Αθήνα",
   },
   {
     title: "Κουζίνα σε σχήμα Γ",
     image: "/project-kitchen-corner.png",
+    alt: "Ανακαίνιση κουζίνας σε σχήμα Γ – Eco ReHome Αθήνα",
   },
 ];
 
@@ -147,7 +181,7 @@ const trustItems = [
 
 const faqs = [
   {
-    question: "Πόσο χρόνο χρειάζεται μια ανακαίνιση;",
+    question: "Πόσο χρόνο χρειάζεται μια ανακαίνιση στην Αθήνα;",
     answer:
       "Ο χρόνος εξαρτάται από το μέγεθος και τις απαιτήσεις του έργου. Πριν την έναρξη παρέχουμε σαφές χρονοδιάγραμμα με όλα τα στάδια.",
   },
@@ -167,7 +201,7 @@ const faqs = [
       "Ναι, παρέχουμε εγγύηση για τις εργασίες που υλοποιούμε, με έμφαση στην ποιότητα και τη σωστή τεχνική εφαρμογή.",
   },
   {
-    question: "Σε ποιες περιοχές εξυπηρετείτε;",
+    question: "Σε ποιες περιοχές της Αθήνας εξυπηρετείτε;",
     answer:
       "Εξυπηρετούμε κυρίως Αθήνα και γύρω περιοχές. Για έργα εκτός Αττικής, η ομάδα μας ενημερώνει για διαθεσιμότητα και διαδικασία.",
   },
@@ -218,12 +252,14 @@ function ReasonIcon({ icon }: { icon: string }) {
 export default function Home() {
   return (
     <div className="bg-white text-zinc-900 scroll-smooth">
+      <JsonLd data={faqSchema(faqs)} />
+
       <header className="sticky top-0 z-20 border-b border-emerald-100/70 bg-white/90 backdrop-blur">
         <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-4 lg:px-8">
           <a href="#" className="flex items-center gap-3">
             <Image
               src="/ecorehome-logo.png"
-              alt="Λογότυπο Eco ReHome"
+              alt="Eco ReHome – Ανακαινίσεις Αθήνα"
               width={44}
               height={44}
               className="rounded-md border border-emerald-200"
@@ -233,7 +269,7 @@ export default function Home() {
               Eco ReHome
             </p>
           </a>
-          <nav className="hidden items-center gap-2 md:flex">
+          <nav className="hidden items-center gap-2 md:flex" aria-label="Κύρια πλοήγηση">
             {navSections.map((section) => (
               <a
                 key={section.label}
@@ -257,14 +293,15 @@ export default function Home() {
         <section className="mx-auto grid w-full max-w-6xl gap-12 px-6 py-20 lg:grid-cols-2 lg:items-center lg:px-8 lg:py-28">
           <div className="space-y-8">
             <p className="inline-flex rounded-full border border-emerald-200 bg-emerald-50 px-4 py-1 text-sm font-medium text-emerald-700 transition-transform duration-300 hover:scale-105">
-              10+ χρόνια εμπειρίας στις ανακαινίσεις
+              Εταιρεία ανακαινίσεων στην Αθήνα · 10+ χρόνια εμπειρίας
             </p>
             <h1 className="text-4xl font-semibold leading-tight tracking-tight text-zinc-900 md:text-5xl">
-              Ανακαινίζουμε τον χώρο σας με ποιότητα &amp; στυλ
+              Ανακαινίσεις στην Αθήνα με ποιότητα &amp; στυλ
             </h1>
             <p className="max-w-xl text-lg leading-relaxed text-zinc-600">
-              Η Eco ReHome προσφέρει ολοκληρωμένες λύσεις ανακαίνισης με αξιοπιστία, συνέπεια και έμφαση στη λεπτομέρεια.
-              Δημιουργούμε χώρους που συνδυάζουν αισθητική, λειτουργικότητα και αντοχή στον χρόνο.
+              Η Eco ReHome είναι συνεργείο ανακαινίσεων στην Αθήνα με ολοκληρωμένες λύσεις για
+              διαμερίσματα, κουζίνες, μπάνια και επαγγελματικούς χώρους. Δημιουργούμε χώρους που
+              συνδυάζουν αισθητική, λειτουργικότητα και αντοχή στον χρόνο.
             </p>
             <a
               href="#contact"
@@ -311,7 +348,7 @@ export default function Home() {
           <div className="mx-auto w-full max-w-6xl px-6 lg:px-8">
             <div className="max-w-3xl space-y-6">
               <h2 className="text-3xl font-semibold tracking-tight text-zinc-900 md:text-4xl">
-                Σχεδιάζουμε και υλοποιούμε ανακαινίσεις με επαγγελματισμό
+                Εταιρεία ανακαινίσεων στην Αθήνα με επαγγελματισμό
               </h2>
               <p className="text-lg leading-relaxed text-zinc-600">
                 Στην Eco ReHome επενδύουμε σε σύγχρονες τεχνικές, ποιοτικά υλικά και αυστηρή επίβλεψη έργων. Με περισσότερα από
@@ -329,7 +366,7 @@ export default function Home() {
           <div className="mb-10 max-w-2xl space-y-4">
             <h2 className="text-3xl font-semibold tracking-tight text-zinc-900 md:text-4xl">Υπηρεσίες Ανακαίνισης</h2>
             <p className="text-lg text-zinc-600">
-              Παρέχουμε ολοκληρωμένες υπηρεσίες με υψηλά πρότυπα ποιότητας για οικιακούς και επαγγελματικούς χώρους.
+              Παρέχουμε ολοκληρωμένες υπηρεσίες με υψηλά πρότυπα ποιότητας για οικιακούς και επαγγελματικούς χώρους στην Αθήνα.
             </p>
           </div>
           <div className="grid gap-6 md:grid-cols-2">
@@ -338,11 +375,43 @@ export default function Home() {
                 key={service.title}
                 className="group rounded-3xl border border-emerald-100 bg-white p-7 transition-all duration-300 hover:-translate-y-1 hover:scale-[1.01] hover:border-emerald-200 hover:shadow-lg"
               >
-                <h3 className="text-2xl font-semibold tracking-tight text-zinc-900">{service.title}</h3>
+                <h3 className="text-2xl font-semibold tracking-tight text-zinc-900">
+                  <Link href={service.href} className="hover:text-emerald-700">
+                    {service.title}
+                  </Link>
+                </h3>
                 <p className="mt-3 text-base leading-relaxed text-zinc-600">{service.description}</p>
+                <Link
+                  href={service.href}
+                  className="mt-4 inline-block text-sm font-medium text-emerald-700 hover:underline"
+                >
+                  Μάθετε περισσότερα →
+                </Link>
                 <div className="mt-6 h-1 w-12 rounded-full bg-emerald-200 transition-all duration-300 group-hover:w-20 group-hover:bg-emerald-500" />
               </article>
             ))}
+          </div>
+        </section>
+
+        <section className="border-y border-emerald-100 bg-emerald-50/40 py-14">
+          <div className="mx-auto w-full max-w-6xl px-6 lg:px-8">
+            <h2 className="text-2xl font-semibold tracking-tight text-zinc-900 md:text-3xl">
+              Εξειδικευμένες υπηρεσίες ανακαίνισης
+            </h2>
+            <p className="mt-3 max-w-2xl text-zinc-600">
+              Εξερευνήστε τις εξειδικευμένες σελίδες μας για κάθε τύπο έργου στην Αθήνα.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              {SERVICE_LINKS.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="rounded-full border border-emerald-200 bg-white px-4 py-2 text-sm font-medium text-emerald-800 transition hover:border-emerald-300 hover:bg-emerald-50"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -368,10 +437,12 @@ export default function Home() {
                 key={project.title}
                 className="group relative aspect-[4/3] overflow-hidden rounded-2xl border border-emerald-100 transition duration-300 hover:-translate-y-1 hover:shadow-lg"
               >
-                <img
+                <Image
                   src={project.image}
-                  alt={project.title}
-                  className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                  alt={project.alt}
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="object-cover transition duration-500 group-hover:scale-105"
                   loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/15 to-transparent" />
@@ -450,7 +521,7 @@ export default function Home() {
                       </span>
                     ))}
                   </div>
-                  <p className="leading-relaxed">"{item.text}"</p>
+                  <p className="leading-relaxed">&ldquo;{item.text}&rdquo;</p>
                   <footer className="mt-5 text-sm font-semibold text-emerald-700">{item.name}</footer>
                 </blockquote>
               ))}
@@ -540,73 +611,7 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="border-t border-emerald-100 bg-white py-10">
-        <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
-          <div>
-            <div className="flex items-center gap-3">
-              <Image
-                src="/ecorehome-logo.png"
-                alt="Λογότυπο Eco ReHome"
-                width={40}
-                height={40}
-                className="rounded-md border border-emerald-200"
-              />
-              <p className="text-xl font-semibold tracking-tight text-emerald-700">Eco ReHome</p>
-            </div>
-            <p className="mt-1 text-sm text-zinc-600">Ανακαινίσεις με ποιότητα, συνέπεια και premium αισθητική.</p>
-          </div>
-          <div className="flex flex-wrap items-center gap-3 text-sm text-zinc-700">
-            <a
-              className="inline-flex items-center gap-2 rounded-full border border-emerald-100 px-4 py-2 transition-all duration-300 hover:-translate-y-0.5 hover:border-emerald-300 hover:text-emerald-700 hover:shadow-sm"
-              href="https://www.tiktok.com/@ecorehome"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="TikTok Eco ReHome"
-            >
-              <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current" aria-hidden="true">
-                <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.24V2h-3.12v13.36a2.79 2.79 0 1 1-1.91-2.65V9.54a5.93 5.93 0 1 0 5.03 5.86V8.57a7.93 7.93 0 0 0 4.64 1.49V6.94c-.29 0-.58-.09-.87-.25Z" />
-              </svg>
-              <span>@ecorehome</span>
-            </a>
-            <a
-              className="inline-flex items-center gap-2 rounded-full border border-emerald-100 px-4 py-2 transition-all duration-300 hover:-translate-y-0.5 hover:border-emerald-300 hover:text-emerald-700 hover:shadow-sm"
-              href="https://www.instagram.com/ecorehome"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram Eco ReHome"
-            >
-              <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current" aria-hidden="true">
-                <path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Zm0 1.75a4 4 0 0 0-4 4v8.5a4 4 0 0 0 4 4h8.5a4 4 0 0 0 4-4v-8.5a4 4 0 0 0-4-4h-8.5Zm8.88 1.5a1.12 1.12 0 1 1 0 2.25 1.12 1.12 0 0 1 0-2.25ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 1.75a3.25 3.25 0 1 0 0 6.5 3.25 3.25 0 0 0 0-6.5Z" />
-              </svg>
-              <span>@ecorehome</span>
-            </a>
-            <a
-              className="inline-flex items-center gap-2 rounded-full border border-emerald-100 px-4 py-2 transition-all duration-300 hover:-translate-y-0.5 hover:border-emerald-300 hover:text-emerald-700 hover:shadow-sm"
-              href="https://www.facebook.com/people/Eco-ReHome/61590393044322/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Facebook Eco ReHome"
-            >
-              <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current" aria-hidden="true">
-                <path d="M13.5 22v-8.5h2.85l.45-3.3H13.5V8.02c0-.95.26-1.6 1.63-1.6h1.74V3.14c-.3-.04-1.33-.13-2.53-.13-2.5 0-4.22 1.53-4.22 4.33V10.2H7.5v3.3h2.62V22h3.38Z" />
-              </svg>
-              <span>Eco ReHome</span>
-            </a>
-            <a
-              className="inline-flex items-center gap-2 rounded-full border border-emerald-100 px-4 py-2 transition-all duration-300 hover:-translate-y-0.5 hover:border-emerald-300 hover:text-emerald-700 hover:shadow-sm"
-              href="#privacy"
-            >
-              Πολιτική Απορρήτου
-            </a>
-            <a
-              className="inline-flex items-center gap-2 rounded-full border border-emerald-100 px-4 py-2 transition-all duration-300 hover:-translate-y-0.5 hover:border-emerald-300 hover:text-emerald-700 hover:shadow-sm"
-              href="#terms"
-            >
-              Όροι Χρήσης
-            </a>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

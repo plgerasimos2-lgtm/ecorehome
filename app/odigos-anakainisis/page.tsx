@@ -1,19 +1,20 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 
-export const metadata: Metadata = {
-  title: "Οδηγός Ανακαίνισης | Eco ReHome",
+import JsonLd from "@/app/components/json-ld";
+import SiteFooter from "@/app/components/site-footer";
+import SiteHeader from "@/app/components/site-header";
+import { buildPageMetadata } from "@/lib/seo/build-metadata";
+import { breadcrumbSchema } from "@/lib/seo/json-ld";
+
+export const metadata: Metadata = buildPageMetadata({
+  title: "Οδηγός Ανακαίνισης PDF | Eco ReHome",
   description:
-    "Δωρεάν οδηγός ανακαίνισης από την Eco ReHome: βήματα, συμβουλές και χρήσιμες πληροφορίες πριν ξεκινήσετε το έργο σας.",
-  openGraph: {
-    title: "Οδηγός Ανακαίνισης | Eco ReHome",
-    description:
-      "Κατεβάστε ή διαβάστε online τον οδηγό ανακαίνισης της Eco ReHome.",
-    type: "article",
-    locale: "el_GR",
-  },
-};
+    "Δωρεάν οδηγός ανακαίνισης PDF από την Eco ReHome: βήματα, συμβουλές και χρήσιμες πληροφορίες πριν ξεκινήσετε το έργο σας στην Αθήνα.",
+  path: "/odigos-anakainisis",
+  keywords: ["Οδηγός Ανακαίνισης", "Ανακαινίσεις Αθήνα", "Eco ReHome"],
+  ogType: "article",
+});
 
 const PDF_PATH = "/odigos-anakainisis.pdf";
 const PDF_FILENAME = "Eco-ReHome-Odigos-Anakainisis.pdf";
@@ -28,35 +29,14 @@ const highlights = [
 export default function RenovationGuidePage() {
   return (
     <div className="min-h-full bg-white text-zinc-900">
-      <header className="sticky top-0 z-20 border-b border-emerald-100/70 bg-white/90 backdrop-blur">
-        <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-4 lg:px-8">
-          <Link href="/" className="flex items-center gap-3">
-            <Image
-              src="/ecorehome-logo.png"
-              alt="Λογότυπο Eco ReHome"
-              width={44}
-              height={44}
-              className="rounded-md border border-emerald-200"
-              priority
-            />
-            <p className="text-lg font-semibold tracking-tight text-emerald-700">Eco ReHome</p>
-          </Link>
-          <div className="flex items-center gap-3">
-            <Link
-              href="/"
-              className="hidden rounded-full px-3 py-2 text-sm font-medium text-zinc-700 transition hover:bg-emerald-50 hover:text-emerald-700 sm:inline-block"
-            >
-              Αρχική
-            </Link>
-            <Link
-              href="/#contact"
-              className="rounded-full border border-emerald-200 px-4 py-2 text-sm font-medium text-emerald-700 transition hover:border-emerald-300 hover:bg-emerald-50"
-            >
-              Επικοινωνία
-            </Link>
-          </div>
-        </div>
-      </header>
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Αρχική", path: "/" },
+          { name: "Οδηγός Ανακαίνισης", path: "/odigos-anakainisis" },
+        ])}
+      />
+
+      <SiteHeader currentPath="/odigos-anakainisis" />
 
       <main>
         <section className="border-b border-emerald-100 bg-gradient-to-br from-emerald-50 via-white to-zinc-50">
@@ -69,7 +49,7 @@ export default function RenovationGuidePage() {
             </h1>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-zinc-600">
               Ένας πρακτικός οδηγός από την Eco ReHome για όσους σχεδιάζουν ανακαίνιση σπιτιού ή
-              επαγγελματικού χώρου. Διαβάστε τον online ή κατεβάστε τον για να τον έχετε πάντα
+              επαγγελματικού χώρου στην Αθήνα. Διαβάστε τον online ή κατεβάστε τον για να τον έχετε πάντα
               μαζί σας.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
@@ -94,12 +74,13 @@ export default function RenovationGuidePage() {
           <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px]">
             <div className="overflow-hidden rounded-3xl border border-emerald-100 bg-white shadow-sm">
               <div className="border-b border-emerald-100 bg-emerald-50/60 px-5 py-3">
-                <p className="text-sm font-medium text-emerald-800">Προεπισκόπηση οδηγού</p>
+                <h2 className="text-sm font-medium text-emerald-800">Προεπισκόπηση οδηγού</h2>
               </div>
               <iframe
                 src={PDF_PATH}
-                title="Οδηγός Ανακαίνισης Eco ReHome"
+                title="Οδηγός Ανακαίνισης Eco ReHome – PDF"
                 className="h-[min(80vh,900px)] w-full bg-zinc-100"
+                loading="lazy"
               />
             </div>
 
@@ -139,14 +120,7 @@ export default function RenovationGuidePage() {
         </section>
       </main>
 
-      <footer className="border-t border-emerald-100 bg-white py-8">
-        <div className="mx-auto flex w-full max-w-6xl flex-col gap-3 px-6 text-sm text-zinc-600 lg:px-8">
-          <Link href="/" className="font-medium text-emerald-700 hover:underline">
-            ← Επιστροφή στην αρχική
-          </Link>
-          <p>© {new Date().getFullYear()} Eco ReHome. Με επιφύλαξη παντός δικαιώματος.</p>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }
