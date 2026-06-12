@@ -1,7 +1,7 @@
 export const SITE_URL = "https://ecorehomeconstructions.com";
 
 export const BUSINESS = {
-  name: "Eco ReHome",
+  name: "Ανακαινίσεις Αθήνα | Eco ReHome Constructions",
   legalName: "Eco ReHome Constructions",
   phone: "+306970652145",
   phoneDisplay: "6970652145",
